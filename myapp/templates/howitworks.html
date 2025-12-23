@@ -1,0 +1,289 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>How VirtuFit Works | AI Virtual Dressing Room</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --purple-1: #7f5cff;
+  --purple-2: #b36cff;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(127, 92, 255, 0.15);
+  --text-dark: #1f1f1f;
+  --text-muted: #6b6b6b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 8%;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+nav h1 {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--purple-1);
+}
+
+nav a {
+  color: var(--purple-1);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 90px 10% 40px;
+}
+
+.hero h2 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.hero h2 span {
+  color: var(--purple-1);
+}
+
+.hero p {
+  margin-top: 20px;
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* STEPS */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 70px 8%;
+}
+
+.step-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  padding: 32px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(127,92,255,0.15),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(127,92,255,0.25);
+}
+
+.step-card:hover::before {
+  opacity: 1;
+}
+
+.step-number {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--purple-2);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.step-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.step-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* MAGIC SECTION */
+.magic {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.magic h2 {
+  font-size: 40px;
+  font-weight: 800;
+}
+
+.magic h2 span {
+  color: var(--purple-1);
+}
+
+.magic ul {
+  list-style: none;
+  margin-top: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.magic li {
+  margin: 14px 0;
+  font-size: 17px;
+  color: var(--text-muted);
+}
+
+/* RESULT */
+.result {
+  background: linear-gradient(
+    135deg,
+    rgba(127,92,255,0.15),
+    rgba(179,108,255,0.1)
+  );
+  margin: 70px 8%;
+  padding: 55px;
+  border-radius: 26px;
+  text-align: center;
+}
+
+.result h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--purple-1);
+}
+
+.result p {
+  margin-top: 18px;
+  font-size: 18px;
+  color: #3a3a3a;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 35px;
+  font-size: 14px;
+  color: #8a8a8a;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h1>VirtuFit</h1>
+  <a href="{% url 'home' %}">← Back to Home</a>
+</nav>
+
+<section class="hero">
+  <h2>✨ How <span>VirtuFit</span> Brings Clothes to Life</h2>
+  <p>
+    Imagine standing in front of your screen and watching clothes move with you —
+    just like a mirror, but smarter.
+  </p>
+</section>
+
+<section class="steps">
+  <div class="step-card">
+    <div class="step-number">STEP 01</div>
+    <h3>👤 You Step In</h3>
+    <p>
+      VirtuFit instantly detects your body and posture using AI-powered vision.
+      Your shoulders, hips, and movements are tracked in real time.
+    </p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">STEP 02</div>
+    <h3>👕 Clothes Find Their Perfect Fit</h3>
+    <p>
+      Outfits are placed naturally on your body. Sizes adjust automatically,
+      garments align perfectly, and movements stay smooth.
+    </p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">STEP 03</div>
+    <h3>✋ Gesture Control</h3>
+    <p>
+      Swipe left or right to browse outfits. Pinch to move faster.
+      Thumbs-up to capture your look — no clicks required.
+    </p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">STEP 04</div>
+    <h3>📸 Capture the Moment</h3>
+    <p>
+      Found a look you love? Give a thumbs-up and VirtuFit captures it instantly —
+      ready to save or share.
+    </p>
+    <p>This feature is currently Disabled</p>
+  </div>
+</section>
+
+<section class="magic">
+  <h2>🚀 The <span>Magic</span> Behind the Scenes</h2>
+  <ul>
+    <li>Advanced computer vision to understand your body</li>
+    <li>AI pose & hand tracking for natural interaction</li>
+    <li>Real-time image blending for realistic overlays</li>
+  </ul>
+</section>
+
+<section class="result">
+  <h2>💜 The Result</h2>
+  <p>
+    A virtual dressing room that feels personal, fast, and effortless.
+    No trials. No queues. No guesswork.
+    <br><br>
+    <strong>Just you — and your next favorite outfit.</strong>
+  </p>
+</section>
+
+<footer>
+  © 2025 VirtuFit · AI Virtual Dressing Room
+</footer>
+
+</body>
+</html>

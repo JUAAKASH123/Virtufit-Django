@@ -1,0 +1,438 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>VirtuFit | Virtual Dressing Room</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --purple-1: #7f5cff;
+  --purple-2: #b36cff;
+  --purple-soft: rgba(127,92,255,0.15);
+  --purple-glow: rgba(127,92,255,0.45);
+  --gradient: linear-gradient(135deg, var(--purple-1), var(--purple-2));
+  --gradient-soft: linear-gradient(135deg, rgba(127,92,255,0.15), rgba(179,108,255,0.12));
+  --text-main: #1b1b1f;
+  --text-muted: #6e6e80;
+  --border: rgba(127,92,255,0.18);
+  --shadow: 0 25px 70px rgba(127,92,255,0.25);
+  --radius: 24px;
+  --transition: all 0.35s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(127,92,255,0.12), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(179,108,255,0.15), transparent 45%),
+    #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ================= FRAME ================= */
+.frame {
+  width: 94vw;
+  max-width: 1500px;
+  height: 92vh;
+  display: flex;
+  border-radius: var(--radius);
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* ================= CAMERA AREA ================= */
+.camera-area {
+  position: relative;
+  flex: 1;
+  background: linear-gradient(180deg, #faf9ff, #f2f0ff);
+  overflow: hidden;
+}
+
+/* Purple glow frame */
+.camera-area::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 2px rgba(127,92,255,0.25);
+  pointer-events: none;
+}
+
+img#stream {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ================= FLOATING BUTTONS ================= */
+.floating-btn {
+  position: absolute;
+  height: 64px;
+  padding: 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+
+  /* HIGH CONTRAST */
+  background: var(--gradient);
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+
+  cursor: pointer;
+  border: none;
+  box-shadow:
+    0 12px 35px rgba(127,92,255,0.55),
+    inset 0 0 0 1px rgba(255,255,255,0.35);
+
+  transition: var(--transition);
+  z-index: 10;
+}
+
+.floating-btn:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow:
+    0 22px 60px rgba(127,92,255,0.8),
+    inset 0 0 0 1px rgba(255,255,255,0.6);
+}
+
+.floating-left { top: 22px; left: 22px; }
+.floating-right { top: 22px; right: 22px; }
+
+/* ================= CAMERA TOGGLE ================= */
+.camera-toggle {
+  position: absolute;
+  bottom: 26px;
+  right: 26px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: linear-gradient(180deg, #ffffff, #f6f3ff);
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  box-shadow: 0 15px 40px rgba(127,92,255,0.3);
+}
+
+.live-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #ff3b3b;
+  box-shadow: 0 0 14px rgba(255,59,59,0.7);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.6; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.camera-toggle span {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* SWITCH */
+.switch {
+  position: relative;
+  width: 54px;
+  height: 30px;
+}
+
+.switch input {
+  opacity: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #ddd;
+  border-radius: 999px;
+  transition: var(--transition);
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 4px;
+  top: 4px;
+  background: white;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.switch input:checked + .slider {
+  background: var(--gradient);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(24px);
+}
+
+/* ================= HINT ================= */
+.hint {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ================= WARDROBE ================= */
+.cloth-panel {
+  width: 220px;
+  height: 100%;
+  padding: 20px 14px;
+  background: linear-gradient(180deg, #faf8ff, #f0ecff);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+/* ================= CLOTH ITEM ================= */
+.cloth-item {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 8px 20px rgba(127,92,255,0.15);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.cloth-item:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 20px 50px rgba(127,92,255,0.45);
+}
+
+.cloth-item img {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+  height: 115px;
+  object-fit: contain;
+}
+
+/* ACTIVE */
+.cloth-item.active {
+  background: var(--gradient-soft);
+  outline: 3px solid var(--purple-1);
+  box-shadow:
+    0 0 0 4px rgba(127,92,255,0.25),
+    0 25px 60px rgba(127,92,255,0.65);
+}
+
+/* ================= SCROLL ================= */
+.cloth-panel::-webkit-scrollbar { width: 6px; }
+.cloth-panel::-webkit-scrollbar-thumb {
+  background: var(--purple-1);
+  border-radius: 6px;
+}
+
+/* ================= CAM OFF ================= */
+img#stream.cam-off {
+  object-fit: contain;
+  background: radial-gradient(circle, #f1efff, #e6e1ff);
+}
+
+/* ================= BACK HOME ================= */
+.back-home {
+  position: absolute;
+  bottom: 26px;
+  left: 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  background: var(--gradient-soft);
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  box-shadow: 0 15px 40px rgba(127,92,255,0.35);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.back-home:hover {
+  background: var(--gradient);
+  color: white;
+  transform: translateY(-4px);
+}
+
+/* ================= MOBILE OVERLAY ================= */
+.mobile-warning {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(127,92,255,0.2), transparent 45%),
+    #ffffff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  z-index: 9999;
+}
+
+.mobile-card {
+  max-width: 420px;
+  padding: 40px 30px;
+  border-radius: 26px;
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.mobile-card h1 {
+  font-size: 28px;
+  font-weight: 800;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 14px;
+}
+
+.mobile-card p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ================= RESPONSIVE RULE ================= */
+@media (max-width: 900px) {
+  .app { display: none; }
+  .mobile-warning { display: flex; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= MOBILE MESSAGE ================= -->
+<div class="mobile-warning">
+  <div class="mobile-card">
+    <h1>Virtufit Dressing Room</h1>
+    <p>
+      Our dressing room demo looks best on larger screens.
+      <br><br>
+      Please visit us on a <strong>tablet</strong> or <strong>desktop</strong> device.
+    </p>
+  </div>
+</div>
+
+<div class="frame">
+
+  <div class="camera-area">
+    <img id="stream" src="/stream/" alt="Video stream">
+
+    <div id="floatPrev" class="floating-btn floating-left">Prev</div>
+    <div id="floatNext" class="floating-btn floating-right">Next</div>
+
+    <div class="camera-toggle">
+      <div id="liveDot" class="live-dot"></div>
+      <span id="camLabel">LIVE</span>
+      <label class="switch">
+        <input type="checkbox" id="camSwitch" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="back-home" id="backHome">⟵ Home</div>
+    <div class="hint">Use gestures or buttons to change outfits</div>
+  </div>
+
+  <div class="cloth-panel">
+    {% for cloth in clothes %}
+    <div class="cloth-item {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}">
+      <img src="{% static 'assets/he/' %}{{ cloth }}">
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+<script>
+(() => {
+  const items = document.querySelectorAll(".cloth-item");
+
+  function updateActive(index) {
+    items.forEach(i => i.classList.remove("active"));
+    if (items[index]) {
+      items[index].classList.add("active");
+      items[index].scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+  }
+
+  async function callAndSync(url) {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.cur_id !== undefined) updateActive(data.cur_id);
+  }
+
+  document.getElementById("floatPrev").onclick = () => callAndSync("/prev/");
+  document.getElementById("floatNext").onclick = () => callAndSync("/next/");
+  items.forEach(item => item.onclick = () => callAndSync(`/select/${item.dataset.index}/`));
+
+  const camSwitch = document.getElementById("camSwitch");
+  const stream = document.getElementById("stream");
+  const liveDot = document.getElementById("liveDot");
+  const camLabel = document.getElementById("camLabel");
+
+  camSwitch.onchange = async () => {
+    if (camSwitch.checked) {
+      await fetch("/camera/start/");
+      stream.src = "/stream/";
+      stream.classList.remove("cam-off");
+      liveDot.style.display = "block";
+      camLabel.textContent = "LIVE";
+    } else {
+      await fetch("/camera/stop/");
+      stream.src = "{% static 'image/camoff.png' %}";
+      stream.classList.add("cam-off");
+      liveDot.style.display = "none";
+      camLabel.textContent = "OFF";
+    }
+  };
+
+  window.addEventListener("beforeunload", () => {
+    navigator.sendBeacon("/camera/stop/");
+  });
+
+  document.getElementById("backHome").onclick = () => {
+    window.location.href = "/";
+  };
+})();
+</script>
+
+</body>
+</html>

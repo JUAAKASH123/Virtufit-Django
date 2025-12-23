@@ -1,0 +1,184 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>About VirtuFit</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple-1: #7f5cff;
+  --purple-2: #b36cff;
+  --glass: rgba(255,255,255,0.08);
+  --glass-light: rgba(255,255,255,0.1);
+  --border-glass: rgba(255,255,255,0.18);
+  --text-main: #1a1a1a;
+  --text-muted: #555;
+  --shadow: 0 20px 60px rgba(0,0,0,0.15);
+  --radius: 24px;
+  --transition: all 0.3s ease;
+  --gradient: linear-gradient(135deg, var(--purple-1), var(--purple-2));
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  background: #f5f2ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.container {
+  max-width: 900px;
+  width: 90%;
+  background: var(--glass-light);
+  backdrop-filter: blur(25px);
+  border-radius: var(--radius);
+  padding: 50px;
+  box-shadow: var(--shadow);
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+h1 {
+  color: var(--purple-1);
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 30px;
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 18px;
+  color: var(--text-main);
+}
+
+.section {
+  margin-top: 40px;
+}
+
+h2 {
+  color: var(--purple-2);
+  font-size: 1.8rem;
+  margin-bottom: 18px;
+  border-left: 5px solid var(--purple-1);
+  padding-left: 12px;
+}
+
+a {
+  color: var(--purple-1);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--purple-2);
+  text-decoration: underline;
+}
+
+.button-home {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 14px 32px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--gradient);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: var(--transition);
+  box-shadow: 0 8px 25px rgba(127,92,255,0.4);
+}
+
+.button-home:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(127,92,255,0.6);
+}
+
+.social-links {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.1rem;
+  color: var(--purple-1);
+  transition: var(--transition);
+}
+
+.social-links a i {
+  font-size: 1.5rem;
+}
+
+.social-links a:hover {
+  color: var(--purple-2);
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 30px 20px;
+  }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  p { font-size: 1rem; }
+  .button-home { padding: 12px 24px; }
+}
+</style>
+
+<!-- FontAwesome for social icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div class="container">
+  <h1>About VirtuFit</h1>
+
+  <div class="section">
+    <p>
+      VirtuFit is a cutting-edge AI-powered virtual dressing room that allows you to try on clothes from the comfort of your home.
+      Revolutionizing fashion, VirtuFit provides a seamless and interactive way to explore styles and outfits before making a purchase.
+    </p>
+    <p>
+      Our platform leverages advanced computer vision and AI algorithms to simulate realistic clothing try-ons, helping you
+      visualize exactly how an outfit fits your body shape.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>About the Developer</h2>
+    <p>
+      This project was developed by <strong>Aakash Udai</strong>, a passionate AI & web developer from Kerala, India.
+      Connect with me on:
+    </p>
+    <div class="social-links">
+      <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      <a href="https://huggingface.co/yourusername" target="_blank"><i class="fas fa-robot"></i> Hugging Face</a>
+      <a href="https://www.linkedin.com/in/yourlinkedinprofile" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    </div>
+  </div>
+
+  <a href="/" class="button-home">⟵ Back to Home</a>
+</div>
+</body>
+</html>
