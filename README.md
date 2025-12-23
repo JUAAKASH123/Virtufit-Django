@@ -7,7 +7,7 @@ By combining computer vision, pose detection, and gesture recognition, VirtuFit 
 ✋ Control with hand gestures.
 📸 Capture your perfect look.
 
-✨ Features
+✨ Features:
  🎥 Real-time Camera-Based Try-On
  🤖 AI Pose Detection (Body Alignment)
  ✋ Hand Gesture Controls
@@ -22,7 +22,7 @@ By combining computer vision, pose detection, and gesture recognition, VirtuFit 
 🌐 Web-based (No App Required)
 🧠 How It Works (High Level)
 
-Camera Feed
+Camera Feed:
  Webcam input is captured in real time.
  Pose Detection
  AI detects shoulders and hips using MediaPipe Pose.
@@ -36,7 +36,7 @@ Camera Feed
  Web Streaming
  Frames are streamed to the browser using Django.
 
-🛠️ Tech Stack
+🛠️ Tech Stack:
  Backend
  Python
  Django
@@ -44,26 +44,26 @@ Camera Feed
  MediaPipe
  NumPy
  
- Frontend
+ Frontend:
   HTML5
   CSS3
   JavaScript
   Modern UI (SaaS-style, Glassmorphism)
   
- AI / CV
+ AI / CV:
   Pose Detection
   Hand Tracking
   Gesture Recognition
   Image Blending
 
-🎯 Use Cases
+🎯 Use Cases:
  👚 Online fashion stores
  🛍️ Virtual try-on experiences
  🎓 AI / Computer Vision projects
  🧪 Research & demos
  🏆 Hackathons
 
-💜 Author
+💜 Author:
 Aakash Udai
 AI & Full-Stack Developer
 Building the future of virtual fashion 🚀
