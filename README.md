@@ -7,11 +7,14 @@
 A production-minded, AI-powered virtual dressing room that lets users try on clothes in real time using a webcam. VirtuFit combines pose estimation, hand-gesture interaction, and smooth image blending to deliver a responsive, contact-free virtual try-on experience for e-commerce demos, research, and prototypes.
 
 ---
-##Demo: https://youtu.be/aOOa4nPDDWI
-##screenshort
-<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/9e488c9e-a327-4b1a-be6e-9f9b8144d2ab" />
-<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/b2883fd6-1cc7-4f3c-acc0-d7e4cdad0a17" />
-<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/bf9c0f57-bccc-41f6-a4d1-e9b2da08f385" />
+Demo: https://youtu.be/aOOa4nPDDWI
+---
+Screenshort
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/9e488c9e-a327-4b1a-be6e-9f9b8144d2ab" width="30%" />
+  <img src="https://github.com/user-attachments/assets/bf9c0f57-bccc-41f6-a4d1-e9b2da08f385" width="30%" />
+  <img src="https://github.com/user-attachments/assets/b2883fd6-1cc7-4f3c-acc0-d7e4cdad0a17" width="30%" />
+</p>
 ---
 ## Key highlights
 
